@@ -1,0 +1,97 @@
+.upload-container {
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 30px;
+    background: #ffffff;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    transition: all 0.3s ease;
+  }
+  
+  .upload-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .upload-form .form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  /* Style for all form fields */
+.form-group select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #fff;
+    color: #333;
+    transition: border-color 0.3s ease;
+    appearance: none; /* removes default OS dropdown arrow for customization */
+    background-image: url("data:image/svg+xml;utf8,<svg fill='%23666' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    cursor: pointer;
+  }
+  
+  .form-group select:focus {
+    border-color: #666;
+    outline: none;
+  }
+  
+  /* Responsive tweak for smaller screens */
+  @media (max-width: 600px) {
+    .form-group select {
+      font-size: 14px;
+      padding: 9px 10px;
+    }
+  }
+  
+  .upload-form label {
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #444;
+  }
+  
+  .upload-form input[type="text"],
+  .upload-form input[type="file"],
+  .upload-form textarea {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .upload-form input:focus,
+  .upload-form textarea:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  .upload-btn {
+    background-color: #007bff;
+    color: #fff;
+    padding: 14px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+  }
+  
+  .upload-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  @media (max-width: 768px) {
+    .upload-container {
+      margin: 20px;
+      padding: 20px;
+    }
+  }
+  
