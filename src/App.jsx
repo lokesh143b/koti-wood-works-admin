@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Sidebar from './components/Sidebar/Sidebar';
 import Navbar from './components/Navbar/Navbar';
 import PhotoUpload from './pages/PhotoUpload/PhotoUpload';
@@ -9,8 +9,11 @@ import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
 import ProtectedRoute from './components/ProtectedRoute';
 import { AdminContext } from './context/AdminContext';
+import ResetPassword from './pages/ResetPassword/ResetPassword';
+import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
 
 function App() {
+  const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth > 768);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
@@ -32,6 +35,16 @@ function App() {
     if (isMobile) setSidebarOpen(false);
   };
 
+  const isResetPasswordPage = location.pathname.startsWith('/reset-password');
+
+  if (isResetPasswordPage) {
+    return (
+      <Routes>
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
+      </Routes>
+    );
+  }
+
   return (
     <div className="app-layout">
       <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} isMobile={isMobile} />
@@ -41,8 +54,10 @@ function App() {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+
             <Route
-              path="/dashboard"
+              path="/"
               element={
                 <ProtectedRoute>
                   <Dashboard />

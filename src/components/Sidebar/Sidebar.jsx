@@ -7,7 +7,7 @@ const Sidebar = ({ isOpen, onClose, isMobile }) => {
     <>
       <nav className={`sidebar ${isOpen ? "open" : "closed"}`}>
         <NavLink
-          to="/dashboard"
+          to="/"
           className={({ isActive }) =>
             isActive ? "sidebar-item active" : "sidebar-item"
           }

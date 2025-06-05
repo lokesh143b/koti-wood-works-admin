@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-
-const API_URL = import.meta.env.VITE_API_URL;
+import { AdminContext } from '../../context/AdminContext'; // adjust path as needed
 
 const Signup = () => {
+  const { BASE_URL } = useContext(AdminContext);
+
+  const [name, setName] = useState(''); // added name
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -20,21 +22,24 @@ const Signup = () => {
     }
 
     try {
-      const res = await fetch(`${API_URL}/admin/signup`, {
+      const res = await fetch(`${BASE_URL}/api/admin/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ name, email, password }), // include name
       });
+
       const data = await res.json();
 
       if (!res.ok) {
         setError(data.message || 'Signup failed');
       } else {
         localStorage.setItem('adminToken', data.token);
-        navigate('/dashboard');
+        localStorage.setItem('adminName', data.name || 'Admin');
+        navigate('/');
       }
     } catch (err) {
-      setError('Network error');
+      console.error('Signup error:', err);
+      setError('Network error: Please check your internet connection or server.');
     }
   };
 
@@ -43,6 +48,18 @@ const Signup = () => {
       <form className="auth-form" onSubmit={handleSubmit}>
         <h2>Admin Signup</h2>
         {error && <p className="error-msg">{error}</p>}
+        
+        <label>
+          Name:
+          <input
+            type="text"
+            required
+            value={name}
+            onChange={e => setName(e.target.value)}
+            placeholder="Your name"
+          />
+        </label>
+
         <label>
           Email:
           <input
@@ -53,6 +70,7 @@ const Signup = () => {
             placeholder="admin@example.com"
           />
         </label>
+
         <label>
           Password:
           <input
@@ -63,6 +81,7 @@ const Signup = () => {
             placeholder="Enter password"
           />
         </label>
+
         <label>
           Confirm Password:
           <input
@@ -73,6 +92,7 @@ const Signup = () => {
             placeholder="Confirm password"
           />
         </label>
+
         <button type="submit">Sign Up</button>
         <p>
           Already have an account? <Link to="/login">Login here</Link>
