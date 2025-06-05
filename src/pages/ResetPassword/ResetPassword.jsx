@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './ResetPassword.css';
 import { useParams, useNavigate } from 'react-router-dom';
+import { AdminContext } from '../../context/AdminContext';
 
 function ResetPassword() {
   const { token } = useParams();
@@ -11,6 +12,9 @@ function ResetPassword() {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
+  const { BASE_URL } = useContext(AdminContext);
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage('');
@@ -20,7 +24,7 @@ function ResetPassword() {
 
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/reset-password/${token}`, {
+      const response = await fetch(`${BASE_URL}/api/admin/reset-password/${token}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
