@@ -98,9 +98,9 @@ const Login = () => {
           {isLoading ? "Logging in..." : "Login"}
         </button>
 
-        <p>
-          Don't have an account? <Link to="/signup">Sign up here</Link>
-        </p>
+        //<p>
+        //Don't have an account? <Link to="/signup">Sign up here</Link>
+        //</p>
       </form>
     </div>
   );
